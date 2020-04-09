@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=../../Downloads/twitter4j-4.0.7/lib/twitter4j-core-4.0.7.jar -Dversion=4.0.7 -DgroupId=org.twitter4j -DartifactId=twitter4j -Dpackaging=pom

@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Wed Apr 08 17:07:30 CEST 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-0171-5a54-f97d-000007783608 
+on database directory memory:C:\Users\dounia\Documents\designPatternsII\codejava\webdb with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@77556fd 
+Loaded from file:/C:/Users/dounia/Downloads/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=11.0.3+12-LTS
+user.dir=C:\Users\dounia\Documents\designPatternsII
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
