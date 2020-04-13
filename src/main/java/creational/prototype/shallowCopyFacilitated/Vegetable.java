@@ -1,4 +1,4 @@
 package creational.prototype.shallowCopyFacilitated;
 
-public class Movie extends Item {
+public class Vegetable extends Item {
 }

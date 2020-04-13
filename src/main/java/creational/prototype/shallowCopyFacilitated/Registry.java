@@ -15,8 +15,8 @@ public class Registry {
         Registry registry = new Registry();
         registry.items = new HashMap<>();
         try {
-            registry.items.put("movie_cloned", (Item) createMovie().clone());
-            registry.items.put("book_cloned", (Item) createBook().clone());
+            registry.items.put("vegetable_cloned", (Item) createVegetable().clone());
+            registry.items.put("fruit_cloned", (Item) createFruit().clone());
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
@@ -25,22 +25,22 @@ public class Registry {
 
     public Map<String, Item> loadItems(){
         Map map = new HashMap<String, Item>();
-        map.put("movie_star", createMovie());
-        map.put("book_star", createBook());
+        map.put("star_vegetable", createVegetable());
+        map.put("star_fruit", createFruit());
         return map ;
     }
 
-    private Item createBook() {
-        Item movie = new Book();
-        movie.setTitle("Dune");
-        return movie;
+    private Item createFruit() {
+        Item fruit = new Fruit();
+        fruit.setTitle("mango");
+        return fruit;
     }
 
-    private Item createMovie() {
-        Item movie = new Movie();
-        movie.setPrice(Long.parseLong("20"));
-        movie.setTitle("Happiness therapy");
-        return movie;
+    private Item createVegetable() {
+        Item vegetable = new Vegetable();
+        vegetable.setPrice(Long.parseLong("20"));
+        vegetable.setTitle("eggplant");
+        return vegetable;
     }
 
     public Map<String, Item> getItems() {

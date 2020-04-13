@@ -1,4 +1,4 @@
 package creational.prototype.shallowCopyFacilitated;
 
-public class Book extends Item {
+public class Fruit extends Item {
 }

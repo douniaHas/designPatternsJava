@@ -2,13 +2,13 @@ package creational.prototype.shallowCopy;
 
 import java.util.List;
 
-public class ShallowCopy implements Cloneable {
+public class Request implements Cloneable {
 
     private String sql;
     private List<String> statement;
     private Report report;
 
-    public ShallowCopy(String sql, List<String> statement, Report report) {
+    public Request(String sql, List<String> statement, Report report) {
         this.sql = sql;
         this.statement = statement;
         this.report = report;
@@ -27,8 +27,8 @@ public class ShallowCopy implements Cloneable {
     }
 
     @Override
-    public ShallowCopy clone() throws CloneNotSupportedException {
-        return (ShallowCopy) super.clone();
+    public Request clone() throws CloneNotSupportedException {
+        return (Request) super.clone();
     }
 
 }

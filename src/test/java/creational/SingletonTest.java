@@ -7,7 +7,7 @@ import org.junit.Test;
 public class SingletonTest {
 
     @Test
-    public void runtimeIsSingleton(){
+    public void should_runtime_be_singleton(){
         Runtime instance1 = Runtime.getRuntime();
         Runtime instance2 = Runtime.getRuntime();
 
@@ -15,9 +15,9 @@ public class SingletonTest {
     }
 
     @Test
-    public void stringIsNotSingleton(){
-        String mot1 = new String("abc");
-        String mot2 = new String("def");
+    public void should_string_not_be_a_singleton(){
+        String mot1 = "abc";
+        String mot2 = "def";
 
         Assert.assertNotEquals(mot1, mot2);
     }

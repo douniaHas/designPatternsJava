@@ -4,7 +4,7 @@ package creational.prototype.shallowCopyFacilitated;
 public abstract class Item implements Cloneable{
     private String title = "title";
     private Long price = Long.parseLong("10");
-    private String URL = "http://www.amazon.com";
+    private String URL = "http://www.primeur.fr";
 
     public String getTitle() {
         return title;
