@@ -11,7 +11,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 
-import static creational.singleton.DbSingleton.getInstance;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -41,8 +40,8 @@ public class SingletonTest {
     }
 
     @Test
-    public void should_not_enable_getting_another_instance_by_using_reflection() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, InstantiationException, OperationNotSupportedException, NoPermissionException {
-        getInstance();
+    public void should_not_enable_getting_another_instance_using_reflection() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, InstantiationException, OperationNotSupportedException, NoPermissionException {
+        DbSingleton.getInstance();
         try {
             Constructor<DbSingleton> constructor = DbSingleton.class.getDeclaredConstructor();
             constructor.setAccessible(true);
@@ -53,43 +52,29 @@ public class SingletonTest {
         }
     }
 
-    @Test
-    public void should_get_a_singleton_instance (){
-        Thread thread1 = new Thread(new Runnable() {
-            DbSingleton instance1;
-            @Override
-            public void run() {
-                try {
-                    instance1 = getInstance();
-                } catch (OperationNotSupportedException | NoPermissionException e) {
-                    e.printStackTrace();
-                }
+    private class SingletonThread implements Runnable{
+        DbSingleton instance;
+        @Override
+        public void run() {
+            try {
+                instance = DbSingleton.getInstance();
+            } catch (NoPermissionException e) {
+                Assert.fail();
             }
-        });
-        Thread thread2 = new Thread(new Runnable() {
-            DbSingleton instance2;
-            @Override
-            public void run() {
-                try {
-                    instance2 = getInstance();
-                } catch (OperationNotSupportedException | NoPermissionException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        List<Thread> threads = Arrays.asList(thread1,thread2);
-        threads.parallelStream().forEach(t->t.run());
+        }
     }
 
-    @Test//TODO : parallel test issues..
-    public void should_time_be_zero_for_getting_instance_for_at_least_second_time() throws OperationNotSupportedException, NoPermissionException {
-        long timeBeforeInstance1 = System.currentTimeMillis();
-        DbSingleton instance1 = getInstance();
-        long timeAfterInstance1 = System.currentTimeMillis();
-        DbSingleton instance2 = getInstance();
-        long timeAfterInstance2 = System.currentTimeMillis();
+    /*
+    To test and compare between the failing test and the succeeding one and
+    understand why we added synchronized you can comment the code that is synchronized in DbSingleton class
+    If you do so, the test will fail.
+     */
+    @Test
+    public void should_get_a_singleton_instance (){
+        SingletonThread thread1 = new SingletonThread();
+        SingletonThread thread2 = new SingletonThread();
+        List<SingletonThread> threads = Arrays.asList(thread1,thread2);
 
-        //Assert.assertEquals(0,timeAfterInstance2-timeAfterInstance1);
-        assertEquals(0,timeAfterInstance2-timeAfterInstance1);
+        threads.parallelStream().forEach(t->t.run());
     }
 }
