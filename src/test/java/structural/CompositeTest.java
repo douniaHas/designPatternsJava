@@ -10,14 +10,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CompositeTest {
+
+    /**
+     * The Composite pattern follows a tree model.
+     * It's a cluster of elements of the same type (MenuComponent in our example)
+     * It allows definition of root and leafs .
+     * The root element knows all about the children so it's a strong model
+     * But can become complex too fast (Tree complexity)
+     */
     @Test
-    public void should_grap_sec_attributes_of_director(){
+    public void should_get_technician_security_attribute_of_the_new_composite(){
         Map securityAttributes = new HashMap();
         securityAttributes.put("director", Arrays.asList("Admin", "Visitor"));
         securityAttributes.put("visitor", "Visitor");
         securityAttributes.put("technician", "Admin");
 
-        Assert.assertEquals("Admin", securityAttributes.get("technician"));
+        Map compositeSrcAttributes = new HashMap();
+        compositeSrcAttributes.putAll(securityAttributes);
+
+        Assert.assertEquals("Admin", compositeSrcAttributes.get("technician"));
     }
 
     @Test

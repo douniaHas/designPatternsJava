@@ -10,6 +10,12 @@ import java.util.List;
 
 public class AdapterTest {
 
+    /**
+     * A simple solution to deal with legacy code that we don't want/can't change
+     * Transform an outer object into a well-known to work with
+     * Doesn't need an interface, it'as just an example
+     * Can adapt to multiple objects
+     */
     @Test
     public void shouldAdaptArrayToList(){
         Integer ints[] = {1,2,3};

@@ -1,8 +1,10 @@
 package structural;
+
 import org.junit.Assert;
 import org.junit.Test;
 import structural.bridge.formatAndPrint.HTMLPrinter;
 import structural.bridge.formatAndPrint.WebFormatter;
+import structural.bridge.shape.Blue;
 import structural.bridge.shape.Circle;
 import structural.bridge.shape.Red;
 import structural.bridge.shape.Square;
@@ -13,6 +15,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class BridgeTest {
+
+    /**
+     * The main purpose is to make abstraction and implementation independents
+     * The client has a basic abstraction and can specify behavior .
+     * Designed up-front. Gives a lot of flexibility and extension for the creation of new objects
+     * with the help of abstract classes
+     * Uses composition (so the bridge)
+     * Similar to Adapter with the difference that Bridge works with new code and Adapter works with legacy code
+     */
 
     @Test
     public void shouldDriverJDBCWork(){
@@ -42,20 +53,23 @@ public class BridgeTest {
     @Test
     public void should_print_red_square(){
         Square square = new Square();
-        Assert.assertEquals("RED", square.applyColor(new Red().applyColor()));
+        Red red = new Red();
+        Assert.assertEquals("RED", square.applyColor(red.fill()));
     }
 
 
     @Test
     public void should_print_red_circle(){
         Circle circle = new Circle();
-        Assert.assertEquals("RED", circle.applyColor(new Red().applyColor()));
+        Red red = new Red();
+        Assert.assertEquals("RED", circle.applyColor(red.fill()));
     }
 
     @Test
     public void should_print_blue_circle(){
         Circle circle = new Circle();
-        Assert.assertEquals("BLUE", circle.applyColor("BLUE"));
+        Blue blue = new Blue();
+        Assert.assertEquals("BLUE", circle.applyColor(blue.fill()));
     }
 
     @Test

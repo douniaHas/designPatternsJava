@@ -10,31 +10,42 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import static org.junit.Assert.fail;
+
 public class DecoratorTest {
 
+    /**
+     * The Decorator pattern adds behavior to the base object (with composition)
+     * without changing the existing concrete object nor the hierarchy
+     * It adds functionality based on the base object (interface)
+     * @throws IOException
+     */
+
     @Test
-    public void should_write_from_a_file() throws IOException {
+    public void should_write_from_a_file()  {
         File file = new File("./output.txt");
-        file.createNewFile();
 
-        OutputStream oStream = new FileOutputStream(file);
+        try {
+            file.createNewFile();
+            OutputStream oStream = new FileOutputStream(file);
+            DataOutputStream doStream = new DataOutputStream(oStream);
+            doStream.writeChars("hello");
+            StringBuilder sb = readFromFile("./output.txt");
 
-        DataOutputStream doStream = new DataOutputStream(oStream);
-        doStream.writeChars("hello");
+            Assert.assertNotNull(sb);
+        } catch (IOException e) {
+            fail();
+        }
 
-        //InputStream iStream = new FileInputStream(file);
-
-        //StringBuilder sb = readFromFile("./output.txt");
-
-        doStream.close();
-        oStream.close();
-
-        //Assert.assertEquals("hello", sb);
     }
 
     @Test
     public void should_add_meat_and_mustard_to_sandwich(){
-        String mySandwich = new DressingDecorator(new MeatDecorator(new SimpleSandwich())).make();
+        SimpleSandwich simpleSandwich = new SimpleSandwich();
+        MeatDecorator meatDecorator = new MeatDecorator(simpleSandwich);
+
+        String mySandwich = new DressingDecorator(meatDecorator).make();
+
         Assert.assertEquals("mustard meat sandwich", mySandwich);
     }
 
