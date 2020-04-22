@@ -26,12 +26,12 @@ public class CommandTest {
 
     @Test
     public void should_toggle_light(){
-        Switch switcher = new Switch();
+        Switch aSwitch = new Switch();
         Light light = new Light();
 
-        switcher.execute(new ToggleCommand(light));
-        switcher.execute(new ToggleCommand(light));
-        switcher.execute(new ToggleCommand(light));
+        aSwitch.execute(new ToggleCommand(light));
+        aSwitch.execute(new ToggleCommand(light));
+        aSwitch.execute(new ToggleCommand(light));
     }
 
     @Test

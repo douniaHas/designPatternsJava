@@ -16,12 +16,18 @@ import static behavioral.chainOfResponsability.Type.PURCHASE;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class ChainOfResponsabilityTest {
+public class ChainOfResponsibilityTest {
 
-    private final Logger logger = Logger.getLogger(ChainOfResponsabilityTest.class.getName());
+    /**
+     * The Chain of responsibility Pattern is designed to separate receiver and sender (they don't know about each other, they just submit a request)
+     * It's based on the definition of an abstract class from witch the Handlers extend and a successor attribute
+     * It can be consuming if too large, there can be also some ambiguity for the client to know how is handling his request (He doesn't need to)
+     */
+
+    private final Logger logger = Logger.getLogger(ChainOfResponsibilityTest.class.getName());
 
     @Test
-    public void should_not_log_finest(){//TODO: How to prove with assert?
+    public void should_not_log_finest(){//TODO: How to assert?
         logger.setLevel(Level.FINER);
         Handler handler = new ConsoleHandler();
         handler.setLevel(Level.FINER);
