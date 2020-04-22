@@ -1,20 +1,20 @@
 package structural.Flyweight;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderManagementSystem {
+    private Catalog catalog = new Catalog();
+    private List<Order> orders = new ArrayList<Order>();
 
-    Map<String, Item> items = new HashMap();
 
-    public void takeOrder(String nameItem, int number){
-        if(!items.containsKey(nameItem)){
-            items.put(nameItem, new Item(number, nameItem));
-        }
+    public void takeOrder(String nameItem, int orderNumber){
+        Item item = catalog.lookup(nameItem);
+        orders.add(new Order(item.getName(),orderNumber));
     }
 
     public int report(){
-        return items.size();
+        return catalog.report();
     }
 }
 

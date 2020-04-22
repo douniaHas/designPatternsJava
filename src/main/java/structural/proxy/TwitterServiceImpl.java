@@ -45,7 +45,6 @@ public class TwitterServiceImpl implements TwitterService{
 
     @Override
     public void postTimeline(String message) {
-        //we aren't going to allow this
         System.out.println("here we do not have to be !");
     }
 }

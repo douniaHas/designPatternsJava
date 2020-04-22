@@ -13,16 +13,17 @@ public class JDBCFacade {
         this.connection = connection;
     }
 
-    public void createAdressesTable(){
+    public boolean createAdressesTable(){
         try {
         Statement sta = connection.createStatement();
-            int count = sta.executeUpdate("CREATE TABLE Address (ID INTEGER, StreetName "
+        sta.executeUpdate("CREATE TABLE Address (ID INTEGER, StreetName "
                     + "VARCHAR(20), City VARCHAR(20))");
-        System.out.println("Table created.");
+
         sta.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            return false;
         }
+        return true;
     }
 
     public void addAdresses(){

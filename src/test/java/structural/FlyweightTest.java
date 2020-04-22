@@ -6,8 +6,16 @@ import org.junit.Test;
 
 public class FlyweightTest {
 
+    /**
+     * Flyweight Pattern is a pattern used for performance issues.
+     * It uses a cache system with a factory (Catalog). It's transparent for the client.
+     * It's a refactoring pattern.
+     * It's a pattern of patterns (factory + flyweight)
+     * It's important that the catalog and the objects created are immutable
+     */
+
     @Test
-    public void should_return_new_adress_Integer_if_not_already_created(){
+    public void should_return_new_address_Integer_if_not_already_created(){
         Integer intA = Integer.valueOf(5);
         Integer intB = Integer.valueOf(5);
         Integer intC = Integer.valueOf(12);

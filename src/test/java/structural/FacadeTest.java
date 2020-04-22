@@ -1,17 +1,35 @@
 package structural;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 import structural.Facade.JDBCFacade;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
+@RunWith(MockitoJUnitRunner.class)
 public class FacadeTest {
+
+    /**
+     * The Facade Pattern is used to hide the complexity and dependencies (give a simple facade) for the client
+     * All the complex logic is hidden in a separate class
+     * It's useful for legacy systems where we care more about the interface than about the content and the logic behind
+     * It's a refactoring Pattern
+     * @throws IOException
+     */
+    @Mock
+    private Connection mockConnection;
+    @Mock private Statement mockStatement;
 
     @Test
     public void should_grap_content_from_url() throws IOException {
@@ -28,47 +46,13 @@ public class FacadeTest {
         Assert.assertNotEquals("", sumLine);
 
     }
-    @Ignore
+
+
     @Test
-    public void should_get_addresses_with_jdbc_connection() throws ClassNotFoundException {
+    public void should_create_addresses_with_JBBC_Connection_Simplified() throws ClassNotFoundException, SQLException {
+        when(mockConnection.createStatement()).thenReturn(mockStatement);
+        JDBCFacade facade = new JDBCFacade(mockConnection);
 
-        try {
-
-            Connection conn= DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/test","root","root");
-
-            Statement sta = conn.createStatement();
-            int count = sta.executeUpdate("CREATE TABLE Address (ID INTEGER, StreetName "
-                    + "VARCHAR(20), City VARCHAR(20))");
-
-            System.out.println("Table created.");
-            sta.close();
-
-            sta = conn.createStatement();
-            count = sta.executeUpdate("INSERT INTO Address (ID, StreetName, City) "
-                    + "values (1, '1234 Some street', 'Layton')");
-            System.out.println(count + " record(s) created.");
-            sta.close();
-
-            sta = conn.createStatement();
-            ResultSet rs = sta.executeQuery("SELECT * FROM Address");
-
-            while(rs.next()) {
-                System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3));
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    @Ignore
-    @Test
-    public void createAdressesWithJBBCConnectionSimplified() throws ClassNotFoundException, SQLException {
-        Connection conn= DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/test","root","root");
-        JDBCFacade facade = new JDBCFacade(conn) ;
-        facade.createAdressesTable();
-        facade.addAdresses();
-        facade.getAdresses();
+        assertTrue(facade.createAdressesTable());
     }
 }

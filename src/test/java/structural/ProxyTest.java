@@ -10,6 +10,9 @@ import structural.proxy.TwitterServiceStub;
 
 public class ProxyTest {
     /**
+     * we use a construction of Proxy offered by java.lang.reflect
+     * The Proxy pattern is used to create a simple interface for simplicity, security, remote concerns.
+     * Behavior can be added, restrictions to calls to the object we want to hide too but it's not a decorator pattern.
      * http://twitter4j.org/en/index.html
      * https://developer.twitter.com/en
      * https://docs.inboundnow.com/guide/create-twitter-application/
